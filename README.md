@@ -75,4 +75,55 @@ db_uri = 'postgresql://postgres:hydrogen1@localhost:5432/Covid'
 
 import_excel_to_postgres(excel_file_path, table_name, db_uri)
 ```
+I wanted to find the most recent case fatality rate in the UK, and for this I filtered by total deaths, total cases, and then by the most recent date in the databse and then used this to calculate the case fatality rate in the UK.
 
+```sql
+select
+	location,
+	date,
+	total_cases,
+	total_deaths,
+	(total_deaths/total_cases)*100 as case_fatality_rate
+from public."CovidDeaths"
+where location = 'United Kingdom' and date = '2024-07-07'
+```
+I then found these results:
+
+| Location       | Date       | Total Cases | Total Deaths | Case Fatality Rate (%) |
+|----------------|------------|-------------|--------------|------------------------|
+| United Kingdom | 2024-07-07 | 24,956,066  | 232,112      | 0.93    
+
+I then also wanted to find the countries with the top 10 case mortality rates, and for this I did not filter for the UK
+
+```sql
+select
+	location,
+	continent,
+	date,
+	population,
+	total_cases,
+	total_deaths,
+	(total_deaths/total_cases)*100 as case_fatality_rate
+	row_number() over (order by (total_deaths/total_cases)*100 desc) as rank
+from public."CovidDeaths"
+where date = '2024-07-07' and total_cases is not null and total_deaths is not null and continent is not null
+order by case_fatality_rate desc
+limit 10
+```
+
+| Location                    | Continent       | Date       | Total Cases | Total Deaths | Total Recovered | Case Fatality Rate (%) |
+|-----------------------------|-----------------|------------|-------------|--------------|-----------------|------------------------|
+| Yemen                       | Asia            | 2024-07-07 | 33,696,612  | 11,945       | 2,159           | 18.07                  |
+| Sudan                       | Africa          | 2024-07-07 | 46,874,200  | 63,993       | 5,046           | 7.89                   |
+| Syria                       | Asia            | 2024-07-07 | 22,125,242  | 57,423       | 3,163           | 5.51                   |
+| Somalia                     | Africa          | 2024-07-07 | 17,597,508  | 27,334       | 1,361           | 4.98                   |
+| Peru                        | South America   | 2024-07-07 | 34,049,588  | 4,526,977    | 220,975         | 4.88                   |
+| Egypt                       | Africa          | 2024-07-07 | 110,990,096 | 516,023      | 24,830          | 4.81                   |
+| Mexico                      | North America   | 2024-07-07 | 127,504,120 | 7,616,491    | 334,501         | 4.39                   |
+| Bosnia and Herzegovina      | Europe          | 2024-07-07 | 3,233,530   | 403,652      | 16,388          | 4.06                   |
+| Liberia                     | Africa          | 2024-07-07 | 5,302,690   | 7,930        | 294             | 3.71                   |
+| Afghanistan                 | Asia            | 2024-07-07 | 41,128,772  | 235,214      | 7,998           | 3.40                   |
+
+I was interested to see how the UK ranked in terms of its CFR, so I assigned a row number to each row using the row_number function(). The I ordered this function to assign rows in the order of the CFR
+
+UK came 108
