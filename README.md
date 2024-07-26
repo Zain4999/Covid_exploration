@@ -127,3 +127,24 @@ limit 10
 I was interested to see how the UK ranked in terms of its CFR, so I assigned a row number to each row using the row_number function(). The I ordered this function to assign rows in the order of the CFR
 
 UK came 108
+
+I then wanted to find the total death count in each country. For this I filtered by location and total death. However, as each country has a different death count for each date, I had to find the maximum death count for each country and group it by location and population. We need to use a group by clause as there are multiple rows with the same value that SQL needs to aggregate.
+I also wanted to show the total population that died from covid.
+
+```sql
+select
+	location,
+	population,
+	MAX(total_deaths) as total_death_count,
+	ROUND((MAX(total_deaths)/population*100)::numeric,3) as population_death_percentage
+from public."CovidDeaths"
+where continent is not null 
+-- I have put this condition because without this, the query pulls up results like 'World' and 'Africa'. We get regions and contienents. 
+-- Entries which do not have a continent attached to it are regions and continents
+group by population, location
+having MAX(total_deaths) is not null
+-- Removed blank entries 
+order by total_death_count desc
+limit 10
+```
+
