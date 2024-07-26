@@ -166,3 +166,6 @@ limit 10
 | Germany        | 83369840    | 174979            | 0.210                       |
 | France         | 67813000    | 168091            | 0.248                       |
 
+### Rolling case fatality rate 
+
+I was interested in calcualting a the
