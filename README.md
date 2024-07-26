@@ -16,6 +16,8 @@ I used several key tools to help me with this analysis:
 - **Github**: For allowing me to share my project
 
 # The Analysis 
+
+### Importing the data
 Before starting this analysis I had to create my tables and import my data into PostgreSQL
 I used Python to help me create these tables and then import these tables into my DBMS. 
 
@@ -75,6 +77,7 @@ db_uri = 'postgresql://postgres:hydrogen1@localhost:5432/Covid'
 
 import_excel_to_postgres(excel_file_path, table_name, db_uri)
 ```
+### UK case fatality rate 
 I wanted to find the most recent case fatality rate in the UK, and for this I filtered by total deaths, total cases, and then by the most recent date in the databse and then used this to calculate the case fatality rate in the UK.
 
 ```sql
@@ -93,7 +96,8 @@ I then found these results:
 |----------------|------------|-------------|--------------|------------------------|
 | United Kingdom | 2024-07-07 | 24,956,066  | 232,112      | 0.93    
 
-I then also wanted to find the countries with the top 10 case mortality rates, and for this I did not filter for the UK
+### Top 10 case fatality rates
+I then also wanted to find the countries with the top 10 case fatality rates, and for this I did not filter for the UK
 
 ```sql
 select
@@ -128,6 +132,7 @@ I was interested to see how the UK ranked in terms of its CFR, so I assigned a r
 
 UK came 108
 
+### Total death count
 I then wanted to find the total death count in each country. For this I filtered by location and total death. However, as each country has a different death count for each date, I had to find the maximum death count for each country and group it by location and population. We need to use a group by clause as there are multiple rows with the same value that SQL needs to aggregate.
 I also wanted to show the total population that died from covid.
 
@@ -160,3 +165,4 @@ limit 10
 | Italy          | 59037472    | 197081            | 0.334                       |
 | Germany        | 83369840    | 174979            | 0.210                       |
 | France         | 67813000    | 168091            | 0.248                       |
+
