@@ -208,3 +208,20 @@ plt.title('Global case fatality rate over time', fontweight = 'bold', fontfamily
 plt.show()
 ```
 ![CFR over time](https://github.com/Zain4999/Covid_exploration/commit/bcc1a63e77f7844b5b3c3944bd715c13f8fd5357))
+
+### Vaccinations
+I wanted to have a look at the vaccinations in each country over time. I joined the CovidVaccinations table to the CovidDeaths data, and used this to find the total vaccinations.
+
+```python
+select 
+	cd.continent,
+	cd.location, 
+	cd.date,
+	cd.population,
+	cv.total_vaccinations
+from public."CovidDeaths" as cd
+inner join public."CovidVaccinations" as cv on cd.location = cv.location and cd.date = cv.date
+where cd.continent is not null and total_vaccinations is not null
+order by 2,3
+```
+With this, I find the vaccination over time of each tot
