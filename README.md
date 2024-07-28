@@ -207,4 +207,4 @@ plt.xlabel('Date', fontfamily = 'Arial')
 plt.title('Global case fatality rate over time', fontweight = 'bold', fontfamily = 'Arial')
 plt.show()
 ```
-![Case Fatality rate over time]((https://github.com/Zain4999/Covid_exploration/commit/bcc1a63e77f7844b5b3c3944bd715c13f8fd5357))
+![Case Fatality rate over time](https://github.com/Zain4999/Covid_exploration/commit/bcc1a63e77f7844b5b3c3944bd715c13f8fd5357)
