@@ -207,4 +207,4 @@ plt.xlabel('Date', fontfamily = 'Arial')
 plt.title('Global case fatality rate over time', fontweight = 'bold', fontfamily = 'Arial')
 plt.show()
 ```
-![Case Fatality rate over time](CFR over time.png)
+![CFR over time](CFR over time)
