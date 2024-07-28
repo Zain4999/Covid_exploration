@@ -168,4 +168,42 @@ limit 10
 
 ### Rolling case fatality rate 
 
-I was interested in calcualting a the
+I was interested in calcualting global rolling case fatality rate. I filtered by each day's total cases and deaths and took the sum of those for each day to find the daily global case fatality rate.
+
+```sql
+select distinct 
+	date,
+	sum(total_cases) over (partition by date) as total_global_cases,
+	sum(total_deaths) over (partition by date) as total_global_deaths,
+	(sum(total_deaths) over (partition by date))/(sum(total_cases) over (order by date))*100 as ongoing_case_fatality_rate
+from public."CovidDeaths"
+where continent is not null and total_cases != 0 and total_deaths != 0
+-- Only getting countries and removing the blank entrjes 
+group by date, total_cases, total_deaths
+order by date
+```
+
+I downloaded the result as a CSV and used python to plot date vs rolling case fatality rate
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv('/Users/zainsiddiqi/Data Analyst upskilling/CovidData/rolling CFR.csv')
+df['date'] = pd.to_datetime(df['date'])
+df[['date', 'rolling_case_fatality_rate']]
+date = df['date']
+rolling_case_fatality_rate = df['rolling_case_fatality_rate']
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from matplotlib.ticker import MultipleLocator
+plt.plot(date, rolling_case_fatality_rate)
+plt.ylim(0,2)
+plt.gca().xaxis.set_major_locator(mdates.YearLocator())
+plt.gca().xaxis.set_minor_locator(mdates.MonthLocator())
+plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+plt.gca().yaxis.set_major_locator(MultipleLocator(0.2))  # Set y-axis major ticks at intervals of 0.1
+plt.ylabel('Global case fatality rate', fontfamily = 'Arial')
+plt.xlabel('Date', fontfamily = 'Arial')
+plt.title('Global case fatality rate over time', fontweight = 'bold', fontfamily = 'Arial')
+plt.show()
+```
