@@ -224,4 +224,54 @@ inner join public."CovidVaccinations" as cv on cd.location = cv.location and cd.
 where cd.continent is not null and total_vaccinations is not null
 order by 2,3
 ```
-With this, I find the vaccination over time of each tot
+With this, I was interested to see the cumulative veccaintions compared to the cumulative cases.
+
+```sql
+select 
+	cd.continent,
+	cd.location, 
+	cd.date,
+	cd.population,
+	sum(coalesce(cd.new_cases, 0)) over (partition by cd.location order by cd.date) as cumulative_cases,
+	sum(coalesce(cv.new_vaccinations,0)) over (partition by cd.location order by cd.date) as cumulative_vaccinations
+from public."CovidDeaths" as cd
+inner join public."CovidVaccinations" as cv on cd.location = cv.location and cd.date = cv.date
+where cd.continent is not null and cd.location = 'United Kingdom'
+order by 2,3
+```
+I used python to plot both of these 
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv('/Users/zainsiddiqi/Data Analyst upskilling/CovidData/CasesVsVaccinations.csv')
+df['date'] = pd.to_datetime(df['date'])
+df_UK = df[df['location'] == 'United Kingdom'].copy()
+df_UK[['date', 'cumulative_cases', 'cumulative_vaccinations']]
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from matplotlib.ticker import MultipleLocator, ScalarFormatter, FuncFormatter
+'''date = df_UK['date']
+cumulative_deaths = df_UK['cumulative_deaths']
+cumulative_vaccinations = df_UK['cumulative_vaccinations']'''
+ax = df_UK.plot(x = 'date', y = 'cumulative_cases', label = 'Cumulative cases', color = 'r')
+df_UK.plot(x = 'date', y = 'cumulative_vaccinations', label = 'Cumulative Vaccinations', color = 'b', secondary_y = True, ax = ax)
+ax.set_xlabel('Date')
+ax.set_ylabel('Cumulative Cases (Millions)', color='r')
+ax.right_ax.set_ylabel('Cumulative Vaccinations (Millions)', color='b')
+ax.set_ylim(0, 26000000)
+ax.right_ax.set_ylim(0, 200000000)
+
+def millions(x, pos):
+    'The two args are the value and tick position'
+    return '%d' % (x * 1e-6)
+
+formatter = FuncFormatter(millions)
+plt.gca().xaxis.set_major_locator(mdates.YearLocator())
+plt.gca().xaxis.set_minor_locator(mdates.MonthLocator())
+plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+ax.yaxis.set_major_formatter(formatter)
+ax.right_ax.yaxis.set_major_formatter(formatter)
+plt.title('UK cumulative cases and Vaccinations')
+plt.show()
+```
