@@ -276,3 +276,24 @@ plt.title('UK cumulative cases and Vaccinations')
 plt.show()
 ```
 ![cases vs vaccinatins](https://github.com/Zain4999/Covid_exploration/blob/main/CasesVsVaccinations.png)
+
+Finding the percentage of the population vaccinated over time for each country:
+
+```sql
+with PopvsVac as (
+select 
+	cd.continent,
+	cd.location, 
+	cd.date,
+	cd.population,
+	cv.new_vaccinations,
+	sum(cv.new_vaccinations) over (partition by cd.location order by cd.date) as cumulative_total_vaccinations
+from public."CovidDeaths" as cd
+inner join public."CovidVaccinations" as cv on cd.location = cv.location and cd.date = cv.date
+where cd.continent is not null
+order by 2,3
+)
+select *,
+	(cumulative_total_vaccinations/population)*100 as rolling_vaccination_rate
+from PopvsVac
+```
