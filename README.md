@@ -275,3 +275,4 @@ ax.right_ax.yaxis.set_major_formatter(formatter)
 plt.title('UK cumulative cases and Vaccinations')
 plt.show()
 ```
+![cases vs vaccinatins](https://github.com/Zain4999/Covid_exploration/blob/main/CasesVsVaccinations.png)
