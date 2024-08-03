@@ -207,7 +207,7 @@ plt.xlabel('Date', fontfamily = 'Arial')
 plt.title('Global case fatality rate over time', fontweight = 'bold', fontfamily = 'Arial')
 plt.show()
 ```
-![CFR over time](https://github.com/Zain4999/Covid_exploration/commit/bcc1a63e77f7844b5b3c3944bd715c13f8fd5357))
+![CFR over time](https://github.com/Zain4999/Covid_exploration/blob/main/CFR%20over%20time.png))
 
 ### Vaccinations
 I wanted to have a look at the vaccinations in each country over time. I joined the CovidVaccinations table to the CovidDeaths data, and used this to find the total vaccinations.
