@@ -297,3 +297,5 @@ select *,
 	(cumulative_total_vaccinations/population)*100 as rolling_vaccination_rate
 from PopvsVac
 ```
+# What I learned
+
