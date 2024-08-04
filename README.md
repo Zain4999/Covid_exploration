@@ -276,7 +276,7 @@ ax.right_ax.yaxis.set_major_formatter(formatter)
 plt.title('UK cumulative cases and Vaccinations')
 plt.show()
 ```
-![UK cumulative cases vs vaccinations](https://github.com/Zain4999/Covid_exploration/blob/main/CasesVsVaccinations.png)
+![UK cumulative cases vs vaccinations](https://github.com/Zain4999/Covid_exploration/blob/main/CasesVsVaccinationsV2.png)
 
 Finding the percentage of the population vaccinated over time for each country:
 
