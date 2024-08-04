@@ -251,7 +251,7 @@ df_UK[['date', 'cumulative_cases', 'cumulative_vaccinations']]
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib.ticker import MultipleLocator, ScalarFormatter, FuncFormatter
-'''date = df_UK['date']
+date = df_UK['date']
 cumulative_deaths = df_UK['cumulative_deaths']
 cumulative_vaccinations = df_UK['cumulative_vaccinations']'''
 ax = df_UK.plot(x = 'date', y = 'cumulative_cases', label = 'Cumulative cases', color = 'r')
@@ -259,8 +259,9 @@ df_UK.plot(x = 'date', y = 'cumulative_vaccinations', label = 'Cumulative Vaccin
 ax.set_xlabel('Date')
 ax.set_ylabel('Cumulative Cases (Millions)', color='r')
 ax.right_ax.set_ylabel('Cumulative Vaccinations (Millions)', color='b')
-ax.set_ylim(0, 26000000)
+ax.set_ylim(0, 50000000)
 ax.right_ax.set_ylim(0, 200000000)
+ax.set_xlim([pd.Timestamp('2020-01'),df_UK['date'].max()])
 
 def millions(x, pos):
     'The two args are the value and tick position'
@@ -275,7 +276,7 @@ ax.right_ax.yaxis.set_major_formatter(formatter)
 plt.title('UK cumulative cases and Vaccinations')
 plt.show()
 ```
-![cases vs vaccinatins](https://github.com/Zain4999/Covid_exploration/blob/main/CasesVsVaccinations.png)
+![UK cumulative cases vs vaccinations](https://github.com/Zain4999/Covid_exploration/blob/main/CasesVsVaccinations.png)
 
 Finding the percentage of the population vaccinated over time for each country:
 
