@@ -130,11 +130,11 @@ limit 10
 
 I was interested to see how the UK ranked in terms of its CFR, so I assigned a row number to each row using the row_number function(). The I ordered this function to assign rows in the order of the CFR
 
-UK came 108
+UK came 108th highest for CFR.
 
 ### Total death count
 I then wanted to find the total death count in each country. For this I filtered by location and total death. However, as each country has a different death count for each date, I had to find the maximum death count for each country and group it by location and population. We need to use a group by clause as there are multiple rows with the same value that SQL needs to aggregate.
-I also wanted to show the total population that died from covid.
+I also wanted to show the percentage of the population that had died from covid.
 
 ```sql
 select
@@ -166,9 +166,11 @@ limit 10
 | Germany        | 83369840    | 174979            | 0.210                       |
 | France         | 67813000    | 168091            | 0.248                       |
 
+I was very surpised to learn that the UK had the 6th highest death count considering that it has the 21st highest population count in the world. 
+
 ### Rolling case fatality rate 
 
-I was interested in calcualting global rolling case fatality rate. I filtered by each day's total cases and deaths and took the sum of those for each day to find the daily global case fatality rate.
+I was interested in calcualting the global rolling case fatality rate. I filtered by each country's total cases and deaths and took the sum of those for each day to find an ongoing global case fatality rate.
 
 ```sql
 select distinct 
@@ -209,8 +211,10 @@ plt.show()
 ```
 ![CFR over time](https://github.com/Zain4999/Covid_exploration/blob/main/CFR%20over%20time.png))
 
+We can see that over time the case fatality rate falls.
+
 ### Vaccinations
-I wanted to have a look at the vaccinations in each country over time. I joined the CovidVaccinations table to the CovidDeaths data, and used this to find the total vaccinations.
+I wanted to have a look at the vaccinations in each country over time. I joined the CovidVaccinations table to the CovidDeaths data, and used this to find the total vaccinations and compare this with other statistics. 
 
 ```python
 select 
