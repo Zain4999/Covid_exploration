@@ -115,18 +115,19 @@ order by case_fatality_rate desc
 limit 10
 ```
 
-| Location                    | Continent       | Date       | Total Cases | Total Deaths | Total Recovered | Case Fatality Rate (%) |
-|-----------------------------|-----------------|------------|-------------|--------------|-----------------|------------------------|
-| Yemen                       | Asia            | 2024-07-07 | 33,696,612  | 11,945       | 2,159           | 18.07                  |
-| Sudan                       | Africa          | 2024-07-07 | 46,874,200  | 63,993       | 5,046           | 7.89                   |
-| Syria                       | Asia            | 2024-07-07 | 22,125,242  | 57,423       | 3,163           | 5.51                   |
-| Somalia                     | Africa          | 2024-07-07 | 17,597,508  | 27,334       | 1,361           | 4.98                   |
-| Peru                        | South America   | 2024-07-07 | 34,049,588  | 4,526,977    | 220,975         | 4.88                   |
-| Egypt                       | Africa          | 2024-07-07 | 110,990,096 | 516,023      | 24,830          | 4.81                   |
-| Mexico                      | North America   | 2024-07-07 | 127,504,120 | 7,616,491    | 334,501         | 4.39                   |
-| Bosnia and Herzegovina      | Europe          | 2024-07-07 | 3,233,530   | 403,652      | 16,388          | 4.06                   |
-| Liberia                     | Africa          | 2024-07-07 | 5,302,690   | 7,930        | 294             | 3.71                   |
-| Afghanistan                 | Asia            | 2024-07-07 | 41,128,772  | 235,214      | 7,998           | 3.40                   |
+| Country                   | Continent      | Date       | Population | Cases     | Deaths | Case Fatality Rate (%) | Rank |
+|---------------------------|----------------|------------|------------|-----------|--------|------------------------|------|
+| Yemen                     | Asia           | 2024-07-07 | 33,696,612 | 11,945    | 2,159  | 18.07                  | 1    |
+| Sudan                     | Africa         | 2024-07-07 | 46,874,200 | 63,993    | 5,046  | 7.88                   | 2    |
+| Syria                     | Asia           | 2024-07-07 | 22,125,242 | 57,423    | 3,163  | 5.51                   | 3    |
+| Somalia                   | Africa         | 2024-07-07 | 17,597,508 | 27,334    | 1,361  | 4.98                   | 4    |
+| Peru                      | South America  | 2024-07-07 | 34,049,588 | 4,526,977 | 220,975 | 4.88                  | 5    |
+| Egypt                     | Africa         | 2024-07-07 | 110,990,096 | 516,023  | 24,830 | 4.81                   | 6    |
+| Mexico                    | North America  | 2024-07-07 | 127,504,120 | 7,616,491 | 334,501 | 4.39                  | 7    |
+| Bosnia and Herzegovina    | Europe         | 2024-07-07 | 3,233,530   | 403,652  | 16,388 | 4.06                   | 8    |
+| Liberia                   | Africa         | 2024-07-07 | 5,302,690   | 7,930    | 294    | 3.71                   | 9    |
+| Afghanistan               | Asia           | 2024-07-07 | 41,128,772  | 235,214  | 7,998  | 3.40                   | 10   |
+
 
 I was interested to see how the UK ranked in terms of its CFR, so I assigned a row number to each row using the row_number function(). The I ordered this function to assign rows in the order of the CFR
 
