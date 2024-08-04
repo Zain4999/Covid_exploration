@@ -278,6 +278,10 @@ plt.show()
 ```
 ![UK cumulative cases vs vaccinations](https://github.com/Zain4999/Covid_exploration/blob/main/CasesVsVaccinationsV2.png)
 
+Comparing this with Deaths vs Vaccinations:
+
+
+
 Finding the percentage of the population vaccinated over time for each country:
 
 ```sql
