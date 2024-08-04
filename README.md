@@ -131,7 +131,7 @@ limit 10
 
 I was interested to see how the UK ranked in terms of its CFR, so I assigned a row number to each row using the row_number function(). The I ordered this function to assign rows in the order of the CFR
 
-UK came 108th highest for CFR.
+UK came 108th highest for CFR out of 226 countries.
 
 ### Total death count
 I then wanted to find the total death count in each country. For this I filtered by location and total death. However, as each country has a different death count for each date, I had to find the maximum death count for each country and group it by location and population. We need to use a group by clause as there are multiple rows with the same value that SQL needs to aggregate.
@@ -287,6 +287,8 @@ Comparing this with Deaths vs Vaccinations:
 
 ![UK cumulative deaths vs vaccinations](https://github.com/Zain4999/Covid_exploration/blob/main/DeathsVsVaccinations.png)
 
+The result here is very interesting. We can see visually as the total vaccinations adminstered increased in the UK, the number of cases continued to rise quite rapidly which at first glance can seem as if the vaccines are not successful at preveneting new covid cases. It's a different story when it comes to deaths, however. The data shows that when the vaccines were first rolling out in January 2021 the number of new deaths per day was still high up until March/April 2021. It then began to stabilise after that, suggesting it took time for the effects of the vaccine to take place.
+
 Finding the percentage of the population vaccinated over time for each country:
 
 ```sql
@@ -307,5 +309,22 @@ select *,
 	(cumulative_total_vaccinations/population)*100 as rolling_vaccination_rate
 from PopvsVac
 ```
+This percentage naturally goes up as more people get vaccinated. I had to use a CTE to calculate this.
+
 # What I learned
 
+Throughout this project, I've been able to level up my SQL and Python skills to explore covid data.
+
+- **Complex query crafting**: I became comfortable using advanced SQL queries to filter specific data and to idenitfy trends by using the WITH, ORDER BY and GROUP BY.
+- **Rolling statistics**: Learned how to produce rolling stastics like the ongoing case fatality rate using SUM, PARTITION BY and ORDER BY.
+- **Python visualisation**: Became confident loading CSVs into python and visaulisfing it using modules such as Pandas and Matplotlib. 
+- **Analytical thinking**: Enhanced my real world analytical and problem solving skills.
+
+# Conclusions
+
+### Insights
+There were 2 main insights I got from this data 
+1. The UK had the 6th highest total death count in the world while having the 21st largest population in the world. This is very significant and requires further analysis into why so many people were lost to covid in the UK.
+2. Vaccinations may not reduce the chance of someone contracting covid-19 but it does reduce the chance of death, and it takes time for the benefits of vaccinnes to be seen. The rapid rollout of the vaccines was crucial in lowering the number of new deaths per day. This may suggest that vaccines should be advised by government bodies to reduce severity of symptoms instead of completely eliminate the chance of contracting the disease.
+
+   
