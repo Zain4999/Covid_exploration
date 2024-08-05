@@ -323,8 +323,11 @@ Throughout this project, I've been able to level up my SQL and Python skills to 
 # Conclusions
 
 ### Insights
-There were 2 main insights I got from this data 
+
+There were 2 main insights I got from this data:
 1. The UK had the 6th highest total death count in the world while having the 21st largest population in the world. This is very significant and requires further analysis into why so many people were lost to covid in the UK.
 2. Vaccinations may not reduce the chance of someone contracting covid-19 but it does reduce the chance of death, and it takes time for the benefits of vaccinnes to be seen. The rapid rollout of the vaccines was crucial in lowering the number of new deaths per day. This may suggest that vaccines should be advised by government bodies to reduce severity of symptoms instead of completely eliminate the chance of contracting the disease.
 
-   
+### Closing thoughts
+
+This project enhanced my SQL and Python skills and provided valuable insights into the effect covid-19 had on the world. 
