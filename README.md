@@ -229,7 +229,7 @@ inner join public."CovidVaccinations" as cv on cd.location = cv.location and cd.
 where cd.continent is not null and total_vaccinations is not null
 order by 2,3
 ```
-With this, I was interested to see the cumulative veccaintions compared to the cumulative cases.
+With this, I was interested to see the cumulative vaccintions compared to the cumulative cases in the UK
 
 ```sql
 select 
@@ -283,7 +283,7 @@ plt.show()
 ```
 ![UK cumulative cases vs vaccinations](https://github.com/Zain4999/Covid_exploration/blob/main/CasesVsVaccinationsV2.png)
 
-Comparing this with Deaths vs Vaccinations:
+Comparing this with cumulative deaths and cumulative vaccinations in the UK:
 
 ![UK cumulative deaths vs vaccinations](https://github.com/Zain4999/Covid_exploration/blob/main/DeathsVsVaccinations.png)
 
